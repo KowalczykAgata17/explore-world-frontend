@@ -22,12 +22,16 @@ const TabNavigator = () => {
             //     alignItems: "center"}}
             barStyle={{
                 backgroundColor: paperTheme.dark ? '#202020' : 'white',
+                height: 75,
+                shadowOpacity: 0.6,
+                shadowColor: 'black',
+                shadowRadius: 5
             }}>
             <Tab.Screen
                 name="Map"
                 component={MapScreen}
                 options={{
-                    tabBarLabel: 'MAP',
+                    tabBarLabel: 'Map',
                     //   tabBarIcon: ({color}) => (
                     //     <Home
                     //       set="light"
