@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import AppTitle from '../components/Title';
 
-const PostsScreen = props => {
+const ReelsScreen = props => {
     return (
         <View style={styles.main}>
             <View>
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PostsScreen;
+export default ReelsScreen;

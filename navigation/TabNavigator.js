@@ -3,8 +3,8 @@ import {useTheme} from '@react-navigation/native';
 import React from 'react';
 // import {Category, Home, Notification} from 'react-native-iconly';
 // import Icon from 'react-native-vector-icons/Entypo';
-import MapScreen from '../screens/Map';
-import PostsScreen from '../screens/Posts';
+import MapScreen from '../screens/MapScreen';
+import ReelsScreen from '../screens/ReelsScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -39,10 +39,10 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Posts"
-                component={PostsScreen}
+                name="Reels"
+                component={ReelsScreen}
                 options={{
-                    tabBarLabel: 'POSTS',
+                    tabBarLabel: 'Reels',
                     //   tabBarIcon: ({color, size}) => (
                     //     <Icon name="rss" size={25} color={colors.text} />
                     //   ),
