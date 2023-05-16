@@ -9,6 +9,7 @@ const MapScreen = props => {
     const [marker, setMarker] = useState(null)
     const y = useSharedValue(0);
     const [caption, setCaption] = useState("Select location")
+    const [coordinate, setCoordinate] = useState(null)
 
     return (<GestureHandlerRootView>
         <MapView
@@ -28,10 +29,15 @@ const MapScreen = props => {
             showsMyLocationButton={true}
             loadingEnabled={true}
             showsCompass={true}
-            // onPress={(e) => setMarker(e.nativeEvent.coordinate)}
+            onPoiClick={(e) => {
+                setMarker(e.nativeEvent.coordinate);
+                setCaption(e.nativeEvent.name.replace(/(\r\n|\n|\r)/gm, " "));
+                setCoordinate(e.nativeEvent.coordinate);
+            }}
             onPress={(e) => {
                 setMarker(e.nativeEvent.coordinate);
-                setCaption("(" + e.nativeEvent.coordinate.latitude.toFixed(7) + ", " + e.nativeEvent.coordinate.longitude.toFixed(7) + ")");
+                setCoordinate(e.nativeEvent.coordinate);
+                setCaption("Dropped pin");
             }}
         >
             {marker != null ? <Marker
@@ -40,7 +46,7 @@ const MapScreen = props => {
 
             /> : null}
         </MapView>
-        <BottomSheet panY={y} panCaption={caption}/>
+        <BottomSheet panY={y} panCaption={caption} coordinate={coordinate}/>
     </GestureHandlerRootView>);
 };
 

@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 
-export default function BottomSheet({panY, panCaption}) {
+export default function BottomSheet({panY, panCaption, coordinate}) {
     const {height} = useWindowDimensions();
 
     const gestureHandler = useAnimatedGestureHandler(
@@ -68,7 +68,17 @@ export default function BottomSheet({panY, panCaption}) {
                     <View style={styles.content}>
 
                         <Text style={styles.title}>{panCaption}</Text>
-                        <View style={styles.fakeContent}/>
+
+                        <Text
+                            style={styles.textCoordinate}>{
+                            coordinate ? (
+                                "(" + coordinate.latitude.toFixed(7) + ", " + coordinate.longitude.toFixed(7) + ")"
+                            ) : ("")
+                        }
+                        </Text>
+                        <View style={styles.fakeContent}>
+
+                        </View>
                     </View>
                 </SafeAreaView>
             </Animated.View>
@@ -94,6 +104,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         padding: 20,
+        paddingTop: 10
     },
     title: {
         fontWeight: '400',
@@ -103,4 +114,8 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 1000,
     },
+    textCoordinate: {
+        fontWeight: '200',
+        fontSize: 10
+    }
 });
