@@ -22,7 +22,6 @@ import AppButton from '../../components/Button_main';
 import SecondButton from '../../components/Button_second';
 import {AuthContext} from '../../components/context';
 
-import SignUpScreen from './SignUpScreen';
 // import DrawerNavigator from '../../navigation/DrawerNavigator';
 
 const SignunScreen = props => {

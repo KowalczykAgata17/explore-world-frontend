@@ -12,18 +12,9 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {AuthContext} from '../components/context';
-// import SupportScreen from '../screens/SupportScreen';
-// import ProfileScreen from '../screens/User/ProfileScreen';
-// import SettingsScreen from '../screens/User/SettingsScreen';
-import DrawerNavigator from './DrawerNavigator';
 import RootStackNavigator from './RootStackScreen';
 import TabNavigator from './TabNavigator';
-import MapScreen from '../screens/Map';
-import {createDrawerNavigator} from "@react-navigation/drawer";
-import HomeScreen from "../screens/HomeScreen";
-import MapView from "react-native-maps";
 
-const Drawer = createDrawerNavigator();
 
 
 const AppStackNavigator = () => {
