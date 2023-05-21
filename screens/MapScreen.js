@@ -1,15 +1,43 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useSharedValue} from "react-native-reanimated";
 import BottomSheet from "./BottomSheet";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
+import {WEATHER_API_ENDPOINT} from '@env'
 
-const MapScreen = props => {
+const MapScreen = () => {
     const [marker, setMarker] = useState(null)
     const y = useSharedValue(0);
     const [caption, setCaption] = useState("Select location")
-    const [coordinate, setCoordinate] = useState(null)
+    let [coordinate, setCoordinate] = useState(null)
+    let [temperature, setTemperature] = useState("25")
+    let [iconCode, setIconCode] = useState("01d")
+
+    const getWeather = () => {
+        fetch(WEATHER_API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                longitude: coordinate.longitude,
+                latitude: coordinate.latitude,
+                units: "metric"
+            })
+        })
+            .then(res => res.json())
+            .then(obj => {
+                    setTemperature(Math.round(parseFloat(obj.temperature.toString())));
+                    setIconCode(obj.icon.toString());
+                }
+            )
+            .catch(error => {
+                console.error("Error: " + error);
+            });
+    };
+
 
     return (<GestureHandlerRootView>
         <MapView
@@ -30,14 +58,22 @@ const MapScreen = props => {
             loadingEnabled={true}
             showsCompass={true}
             onPoiClick={(e) => {
+                coordinate = e.nativeEvent.coordinate;
+                setCoordinate(e.nativeEvent.coordinate);
+                if (coordinate != null) {
+                    getWeather();
+                }
                 setMarker(e.nativeEvent.coordinate);
                 setCaption(e.nativeEvent.name.replace(/(\r\n|\n|\r)/gm, " "));
-                setCoordinate(e.nativeEvent.coordinate);
             }}
             onPress={(e) => {
-                setMarker(e.nativeEvent.coordinate);
+                coordinate = e.nativeEvent.coordinate;
                 setCoordinate(e.nativeEvent.coordinate);
+                if (coordinate != null) {
+                    getWeather();
+                }
                 setCaption("Dropped pin");
+                setMarker(e.nativeEvent.coordinate);
             }}
         >
             {marker != null ? <Marker
@@ -46,7 +82,8 @@ const MapScreen = props => {
 
             /> : null}
         </MapView>
-        <BottomSheet panY={y} panCaption={caption} coordinate={coordinate}/>
+        <BottomSheet panY={y} panCaption={caption} coordinate={coordinate} temperature={temperature}
+                     iconCode={iconCode}/>
     </GestureHandlerRootView>);
 };
 

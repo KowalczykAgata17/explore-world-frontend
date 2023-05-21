@@ -8,9 +8,13 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import {PanGestureHandler} from 'react-native-gesture-handler';
+import {Image} from "expo-image";
+import {WEATHER_ICONS_ENPOINT, WEATHER_ICON_FILE_POSTFIX} from '@env'
 
-export default function BottomSheet({panY, panCaption, coordinate}) {
+
+export default function BottomSheet({panY, panCaption, coordinate, temperature, iconCode}) {
     const {height} = useWindowDimensions();
+    const weatherIconURL = WEATHER_ICONS_ENPOINT + iconCode + WEATHER_ICON_FILE_POSTFIX;
 
     const gestureHandler = useAnimatedGestureHandler(
         {
@@ -44,6 +48,7 @@ export default function BottomSheet({panY, panCaption, coordinate}) {
         };
     });
 
+
     return (
         <PanGestureHandler onGestureEvent={gestureHandler}>
             <Animated.View
@@ -54,36 +59,39 @@ export default function BottomSheet({panY, panCaption, coordinate}) {
                 ]}
             >
                 <SafeAreaView style={styles.wrapper}>
-                    <View
-                        style={{
-                            borderBottomColor: '#c2c0bc',
-                            borderBottomWidth: 3,
-                            borderRadius: 2,
-                            width: 60,
-                            height: 13,
-                            alignSelf: "center"
+                    <View style={styles.lineContainer}/>
 
-                        }}
-                    />
                     <View style={styles.content}>
-
-                        <Text style={styles.title}>{panCaption}</Text>
-
-                        <Text
-                            style={styles.textCoordinate}>{
-                            coordinate ? (
-                                "(" + coordinate.latitude.toFixed(7) + ", " + coordinate.longitude.toFixed(7) + ")"
-                            ) : ("")
-                        }
-                        </Text>
-                        <View style={styles.fakeContent}>
-
+                        <View style={styles.locationContainer}>
+                            <View style={styles.locationCoordinateContainer}>
+                                <Text style={styles.locationNameText}>{panCaption}</Text>
+                                <Text
+                                    style={styles.locationCoordinateText}>{
+                                    coordinate ? (
+                                        "(" + coordinate.latitude.toFixed(7) + ", " + coordinate.longitude.toFixed(7) + ")"
+                                    ) : ("")
+                                }
+                                </Text>
+                            </View>
+                            {coordinate ? (
+                                <View style={styles.locationWeatherContainer}>
+                                    <Image
+                                        style={styles.weatherIcon}
+                                        source={weatherIconURL}
+                                        contentFit="cover"
+                                        transition={1000}
+                                    />
+                                    <Text style={styles.locationWeatherText}>{temperature}℃</Text>
+                                </View>
+                            ) : ""}
                         </View>
+                        <View style={styles.fakeContent}></View>
                     </View>
                 </SafeAreaView>
             </Animated.View>
         </PanGestureHandler>
-    );
+    )
+        ;
 }
 
 const styles = StyleSheet.create({
@@ -96,26 +104,58 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowColor: 'black',
         shadowRadius: 5,
-        borderRadius: 10
+        borderRadius: 10,
     },
     wrapper: {
         flex: 1,
     },
     content: {
         flex: 1,
-        padding: 20,
-        paddingTop: 10
+        paddingLeft: 10,
+        paddingRight: 10,
     },
-    title: {
+    lineContainer: {
+        borderBottomColor: '#c2c0bc',
+        borderBottomWidth: 3,
+        borderRadius: 2,
+        width: 60,
+        height: 13,
+        alignSelf: "center",
+    },
+    locationContainer: {
+        flexDirection: "row",
+    },
+    locationCoordinateContainer: {
+        flex: 1,
+        width: "80%",
+        justifyContent: "center",
+    },
+    locationNameText: {
         fontWeight: '400',
         fontSize: 22,
+    },
+    locationCoordinateText: {
+        fontWeight: '200',
+        fontSize: 10
+    },
+    locationWeatherContainer: {
+        alignContent: "center",
+        justifyContent: "center",
+        width: 50,
+        height: 70,
+    },
+    locationWeatherText: {
+        fontWeight: '400',
+        fontSize: 15,
+        alignSelf: 'center'
+    },
+    weatherIcon: {
+        width: 40,
+        height: 40,
+        alignSelf: 'center'
     },
     fakeContent: {
         flex: 1,
         height: 1000,
     },
-    textCoordinate: {
-        fontWeight: '200',
-        fontSize: 10
-    }
 });
