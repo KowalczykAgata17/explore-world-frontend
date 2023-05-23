@@ -2,9 +2,10 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {useTheme} from '@react-navigation/native';
 import React from 'react';
 // import {Category, Home, Notification} from 'react-native-iconly';
-// import Icon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/Entypo';
 import MapScreen from '../screens/MapScreen';
 import ReelsScreen from '../screens/ReelsScreen';
+// import Icon from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -32,14 +33,9 @@ const TabNavigator = () => {
                 component={MapScreen}
                 options={{
                     tabBarLabel: 'Map',
-                    //   tabBarIcon: ({color}) => (
-                    //     <Home
-                    //       set="light"
-                    //       primaryColor={colors.text}
-                    //       stroke="bold"
-                    //       size="large"
-                    //     />
-                    //   ),
+                    tabBarIcon: ({color, size}) => (
+                        <Icon name="compass" size={25} color={colors.text} />
+                    ),
                 }}
             />
             <Tab.Screen
@@ -47,9 +43,9 @@ const TabNavigator = () => {
                 component={ReelsScreen}
                 options={{
                     tabBarLabel: 'Reels',
-                    //   tabBarIcon: ({color, size}) => (
-                    //     <Icon name="rss" size={25} color={colors.text} />
-                    //   ),
+                      tabBarIcon: ({color, size}) => (
+                        <Icon name="clapperboard" size={25} color={colors.text} />
+                      ),
                 }}
             />
         </Tab.Navigator>

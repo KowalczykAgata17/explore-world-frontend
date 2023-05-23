@@ -1,3 +1,5 @@
+// import 'react-native-gesture-handler';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer,} from '@react-navigation/native';
 import React, {useEffect} from 'react';
@@ -6,11 +8,14 @@ import {Provider as PaperProvider,} from 'react-native-paper';
 import {AuthContext} from '../components/context';
 import RootStackNavigator from './RootStackScreen';
 import TabNavigator from './TabNavigator';
+import DrawerNavigator from "./DrawerNavigator";
 
+
+const Drawer = createDrawerNavigator();
 
 const AppStackNavigator = () => {
 
-    // const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+    const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const initialLoginState = {
         isLoading: true,
@@ -137,16 +142,16 @@ const AppStackNavigator = () => {
                         // <View>
                         // <MapView style={{width: '100%', height: '100%'}} />
                         // </View>
-                        <TabNavigator/>
+                        // <TabNavigator/>
                         // <View>
                         //   <MapView style={{width: '100%', height: '100%'}}/>
                         // </View>
-                        //   <Drawer.Navigator
-                        //       drawerContent={props => <DrawerNavigator {...props} />}
-                        //       screenOptions={{headerShown: false}}>
-                        //       <Drawer.Screen name="Home" component={TabNavigator} />
-                        //
-                        // </Drawer.Navigator>
+                          <Drawer.Navigator
+                              drawerContent={props => <DrawerNavigator {...props} />}
+                              screenOptions={{headerShown: false}}>
+                              <Drawer.Screen name="Home" component={TabNavigator}/>
+
+                          </Drawer.Navigator>
                     ) : (
                         <RootStackNavigator/>
                     )}

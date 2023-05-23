@@ -142,7 +142,7 @@ export default SignunScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFDC84',
+        backgroundColor: '#6F8FAF',
     },
     header: {
         flex: 1,

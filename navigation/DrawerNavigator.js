@@ -1,14 +1,14 @@
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-// import {Danger, Home, Logout, Setting, User} from 'react-native-iconly';
 import {Avatar, Caption, Drawer, Title,} from 'react-native-paper';
-// import {useTheme} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Entypo';
+import {useTheme} from '@react-navigation/native';
 import {AuthContext} from '../components/context';
 
 const DrawerNavigator = props => {
-//   const paperTheme = useTheme();
-//   const {colors} = useTheme();
+  const paperTheme = useTheme();
+  const {colors} = useTheme();
 
     const {signOut, /*toggleTheme*/} = React.useContext(AuthContext);
 
@@ -41,36 +41,27 @@ const DrawerNavigator = props => {
                     <Drawer.Section style={styles.drawerSection}>
                         {/* <DrawerItemList {...props} /> */}
                         <DrawerItem
-                            //   icon={() => (
-                            //     <Home set="light" primaryColor={colors.text} size="large" />
-                            //   )}
-                            label="Home"
-                            onPress={() => {
-                                props.navigation.navigate('Home');
-                            }}
-                        />
-                        <DrawerItem
-                            //   icon={() => (
-                            //     <User set="curved" primaryColor={colors.text} size="large" />
-                            //   )}
+                            icon={() => (
+                                <Icon name="home" size={25} color={colors.text} />
+                            )}
                             label="My profile"
                             onPress={() => {
                                 props.navigation.navigate('Home');
                             }}
                         />
                         <DrawerItem
-                            //   icon={() => (
-                            //     <Setting set="curved" primaryColor={colors.text} size="large" />
-                            //   )}
+                            icon={() => (
+                                <Icon name="home" size={25} color={colors.text} />
+                            )}
                             label="Settings"
                             onPress={() => {
                                 props.navigation.navigate('Home');
                             }}
                         />
                         <DrawerItem
-                            //   icon={() => (
-                            //     <Danger set="curved" primaryColor={colors.text} size="large" />
-                            //   )}
+                            icon={() => (
+                                <Icon name="home" size={25} color={colors.text} />
+                            )}
                             label="Support"
                             onPress={() => {
                                 props.navigation.navigate('Home');
