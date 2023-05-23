@@ -12,7 +12,7 @@ const AppButton = ({onPress, title}) => (
             <LinearGradient start={[0, 0.5]}
                             end={[1, 0.5]}
                             colors={['#4682B4', '#679267']}
-                            style={{borderRadius: 22, width: 272, height: 45,}}>
+                            style={{borderRadius: 22, width: 272, height: 45, justifyContent: 'center'}}>
                 <Text style={styles.appButtonText}>{title}</Text>
             </LinearGradient>
 
@@ -39,11 +39,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         alignSelf: 'center',
         textTransform: 'uppercase',
-        // margin: 3,
-        // paddingsHorizontal: 6,
-        textAlign: "center",
-        alignItems: 'center',
-        justifyContent: 'center',
+
     },
 });
 

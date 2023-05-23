@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import {Platform, StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-
 import AppButton from '../../components/Button_main';
 import SecondButton from '../../components/Button_second';
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-// import DrawerNavigator from '../../navigation/DrawerNavigator';
-
-const SignunScreen = props => {
+const SignupScreen = props => {
     const [data, setData] = useState({
         email: '',
         password: '',
         confirm_password: '',
-        chceck_textInputChange: false,
+        check_textInputChange: false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
     });
@@ -70,23 +69,23 @@ const SignunScreen = props => {
             <Animatable.View animation="fadeInUpBig" style={styles.footer}>
                 <Text style={styles.text_footer}> Username </Text>
                 <View style={styles.action}>
-                    {/* <User set="curved" color="#05375a" size={25} /> */}
+                    <EvilIcons name="user" size={30} color="#05375a"/>
                     <TextInput
                         placeholder="Your username"
                         style={styles.textInput}
                         autoCapitalize="none"
                         onChangeText={value => textInputChange(value)}
                     />
-                    {data.chceck_textInputChange ? (
+                    {data.check_textInputChange ? (
                         <Animatable.View animation="bounceIn">
-                            {/* <TickSquare set="curved" color="#05375a" size={25} /> */}
+                            <EvilIcons name="check" size={25} color="#639E6C"/>
                         </Animatable.View>
                     ) : null}
                 </View>
 
                 <Text style={[styles.text_footer, {marginTop: 25}]}> Password </Text>
                 <View style={styles.action}>
-                    {/* <Lock set="light" color="#05375a" size={25} /> */}
+                    <EvilIcons name="lock" size={30} color="#05375a"/>
                     <TextInput
                         placeholder="Your password"
                         secureTextEntry={data.secureTextEntry ? true : false}
@@ -95,18 +94,18 @@ const SignunScreen = props => {
                         onChangeText={value => handlePasswordChange(value)}
                     />
                     <TouchableOpacity onPress={updateSecureTextEntry}>
-                        {/* {data.secureTextEntry ? (
-              <Hide set="curved" color="#05375a" size={25} />
-            ) : (
-              <Show set="curved" color="#05375a" size={25} />
-            )} */}
+                        {data.secureTextEntry ? (
+                            <Ionicons name="eye-off-outline" size={24} color="#05375a"/>
+                        ) : (
+                            <Ionicons name="eye-outline" size={24} color="#05375a"/>
+                        )}
                     </TouchableOpacity>
                 </View>
                 <Text style={[styles.text_footer, {marginTop: 25}]}>
                     Confirm password{' '}
                 </Text>
                 <View style={styles.action}>
-                    {/* <Lock set="light" color="#05375a" size={25} /> */}
+                    <EvilIcons name="lock" size={30} color="#05375a"/>
                     <TextInput
                         placeholder="Confirm your password"
                         secureTextEntry={data.confirm_secureTextEntry ? true : false}
@@ -115,29 +114,30 @@ const SignunScreen = props => {
                         onChangeText={value => handleConfirmPasswordChange(value)}
                     />
                     <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-                        {/* {data.secureTextEntry ? (
-              <Hide set="curved" color="#05375a" size={25} />
-            ) : (
-              <Show set="curved" color="#05375a" size={25} />
-            )} */}
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.button}>
-                    <AppButton title="Sign up" onPress={() => {
-                    }}/>
-                    <SecondButton
-                        title="Sign in"
-                        onPress={() => {
-                            props.navigation.goBack();
-                        }}
-                    />
-                </View>
-            </Animatable.View>
+                        {data.secureTextEntry ? (
+                            <Ionicons name="eye-off-outline" size={24} color="#05375a"/>
+                        ) : (
+                            <Ionicons name="eye-outline" size={24} color="#05375a"/>
+                    )}
+                </TouchableOpacity>
         </View>
-    );
+    <View style={styles.button}>
+        <AppButton title="Sign up" onPress={() => {
+        }}/>
+        <SecondButton
+            title="Sign in"
+            onPress={() => {
+                props.navigation.goBack();
+            }}
+        />
+    </View>
+</Animatable.View>
+</View>
+)
+    ;
 };
 
-export default SignunScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
     container: {
