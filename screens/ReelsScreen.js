@@ -1,50 +1,3 @@
-// import React from 'react';
-// import {StyleSheet, View} from 'react-native';
-// import AppTitle from '../components/Title';
-//
-// const ReelsScreen = props => {
-//     return (
-//         <View style={styles.main}>
-//             <View>
-//                 <AppTitle title="POST"/>
-//             </View>
-//             <View style={styles.textContainer}>
-//                 {/* <Text style={styles.text}>
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-//           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-//           aliquip ex ea commodo consequat. Duis aute irure dolor in
-//           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-//           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-//           culpa qui officia deserunt mollit anim id est laborum.
-//         </Text> */}
-//             </View>
-//         </View>
-//     );
-// };
-//
-// const styles = StyleSheet.create({
-//     main: {
-//         flex: 1,
-//         width: '100%',
-//         height: '100%',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//     textContainer: {
-//         width: '80%',
-//         justifyContent: 'center',
-//         alignContent: 'center',
-//     },
-//     text: {
-//         fontSize: 13,
-//         textAlign: 'center',
-//     },
-// });
-//
-// export default ReelsScreen;
-
-
 import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {View, Text, Button, Image, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
@@ -59,10 +12,15 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 const Post = (props) => {
     const video = React.useRef(null);
     const [status, setStatus] = React.useState({});
+    const [paused, setPaused] = React.useState(false);
+
+    const onPlayPausePress = () => {
+        setPaused(!paused);
+    };
 
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={onPlayPausePress}>
                 <Video
                     ref={video}
                     style={styles.video}
@@ -71,6 +29,7 @@ const Post = (props) => {
                     resizeMode="cover"
                     isLooping
                     onPlaybackStatusUpdate={setStatus}
+                    // paused={paused}
                 />
             </TouchableWithoutFeedback>
 

@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "^1.15.11",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/drawer": "^6.6.2",
@@ -18,8 +19,11 @@
     "@react-navigation/stack": "^6.0.11",
     "expo": "^48.0.15",
     "expo-av": "^13.2.1",
+    "expo-camera": "^13.2.1",
     "expo-image": "^1.2.3",
+    "expo-image-picker": "^14.1.1",
     "expo-linear-gradient": "^12.1.2",
+    "expo-media-library": "^15.2.3",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-horizontal-scrolling-menu": "^2.6.1",

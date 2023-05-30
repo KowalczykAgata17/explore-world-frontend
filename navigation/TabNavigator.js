@@ -5,6 +5,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
 import MapScreen from '../screens/MapScreen';
 import ReelsScreen from '../screens/ReelsScreen';
+import CameraScreen from "../screens/CameraScreen";
 // import Icon from "react-native-vector-icons/Ionicons";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -35,6 +36,16 @@ const TabNavigator = () => {
                     tabBarLabel: 'Map',
                     tabBarIcon: ({color, size}) => (
                         <Icon name="compass" size={25} color={colors.text} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Add"
+                component={CameraScreen}
+                options={{
+                    tabBarLabel: 'Add',
+                    tabBarIcon: ({color, size}) => (
+                        <Icon name="circle-with-plus" size={27} color={colors.text} />
                     ),
                 }}
             />
