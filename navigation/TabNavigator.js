@@ -1,12 +1,10 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {useTheme} from '@react-navigation/native';
 import React from 'react';
-// import {Category, Home, Notification} from 'react-native-iconly';
 import Icon from 'react-native-vector-icons/Entypo';
 import MapScreen from '../screens/MapScreen';
-import ReelsScreen from '../screens/ReelsScreen';
 import CameraScreen from "../screens/CameraScreen";
-// import Icon from "react-native-vector-icons/Ionicons";
+import FeedScreen from "../screens/Feed";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -50,10 +48,10 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Reels"
-                component={ReelsScreen}
+                name="Feed"
+                component={FeedScreen}
                 options={{
-                    tabBarLabel: 'Reels',
+                    tabBarLabel: 'Feed',
                       tabBarIcon: ({color, size}) => (
                         <Icon name="clapperboard" size={25} color={colors.text} />
                       ),
