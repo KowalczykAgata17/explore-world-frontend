@@ -9,7 +9,7 @@ export default function FeedScreen() {
     const mediaRefs = useRef([])
 
     useEffect(() => {
-        fetch(POSTS_ENDPOINT,)
+        fetch('http://10.183.1.156:3004/posts',)
             .then(res => res.json())
             .then(obj => {
                     let result = []
@@ -18,7 +18,6 @@ export default function FeedScreen() {
                             "id": e._id,
                             "content": e.content,
                             "likes": e.likes,
-                            "comments": e.comments,
                             "location": e.location.name,
                             "mediaUrl": e.mediaUrl,
                         })

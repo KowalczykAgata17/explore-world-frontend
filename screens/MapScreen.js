@@ -15,7 +15,8 @@ const MapScreen = () => {
     let [iconCode, setIconCode] = useState("01d")
 
     const getWeather = () => {
-        fetch(WEATHER_API_ENDPOINT, {
+        console.log('http://10.183.1.156:3006/weather/current')
+        fetch('http://10.183.1.156:3006/weather/current', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

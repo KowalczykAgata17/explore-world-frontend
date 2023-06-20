@@ -6,8 +6,9 @@ import * as MediaLibrary from 'expo-media-library';
 import {useIsFocused} from "@react-navigation/native";
 import {Audio} from 'expo-av';
 import {Feather} from '@expo/vector-icons';
+import {useNavigation} from '@react-navigation/native'
 
-const CameraScreen = () => {
+const CameraScreen = (props) => {
     const [hasCameraPermissions, setHasCameraPermissions] = useState(false);
     const [hasAudioPermissions, setHasAudioPermissions] = useState(false);
     const [hasGalleryPermissions, setHasGalleryPermissions] = useState(false);
@@ -21,7 +22,13 @@ const CameraScreen = () => {
     const [isCameraReady, setIsCameraReady] = useState(false)
     const isFocused = useIsFocused()
 
+    const navigation = useNavigation()
+
+
     useEffect(async () => {
+        console.log(props.route.params.coordinate)
+        console.log(props.route.params.locationName)
+
         const cameraStatus = await Camera.requestCameraPermissionsAsync()
         setHasCameraPermissions(cameraStatus.status === 'granted')
 
@@ -65,11 +72,16 @@ const CameraScreen = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Videos,
             allowsEditing: true,
-            aspect: [16,9],
+            aspect: [16, 9],
             quality: 1,
         })
         if (!result.canceled) {
-            //TODO
+            console.log('picked!')
+            navigation.navigate('savePost', {
+                source: result.uri,
+                coordinate: props.route.params.coordinate,
+                locationName: props.route.params.locationName,
+            })
         }
     }
 
@@ -119,7 +131,7 @@ const CameraScreen = () => {
 
                 <View style={{flex: 1}}>
                     <TouchableOpacity
-                        onPress={()=> pickFromGallery()}
+                        onPress={() => pickFromGallery()}
                         style={styles.galleryButton}>
                         {galleryItems[0] === undefined ? <></> :
                             <Image
@@ -155,8 +167,8 @@ const styles = StyleSheet.create({
     },
     recordButton: {
         borderWidth: 8,
-        borderColor: '#ff404087',
-        backgroundColor: '#ff4040',
+        borderColor: '#B6B6B687',
+        backgroundColor: '#c2c2c2',
         borderRadius: 100,
         height: 80,
         width: 80,

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import MapScreen from '../screens/MapScreen';
 import CameraScreen from "../screens/CameraScreen";
 import FeedScreen from "../screens/Feed";
+import SavePostScreen from '../screens/savePost';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -33,7 +34,7 @@ const TabNavigator = () => {
                 options={{
                     tabBarLabel: 'Map',
                     tabBarIcon: ({color, size}) => (
-                        <Icon name="compass" size={25} color={colors.text} />
+                        <Icon name="compass" size={25} color={colors.text}/>
                     ),
                 }}
             />
@@ -41,10 +42,16 @@ const TabNavigator = () => {
                 name="Add"
                 component={CameraScreen}
                 options={{
-                    tabBarLabel: 'Add',
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="circle-with-plus" size={27} color={colors.text} />
-                    ),
+                    tabBarLabel: '',
+                    tabBarIcon: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="savePost"
+                component={SavePostScreen}
+                options={{
+                    tabBarLabel: '',
+                    tabBarIcon: () => null,
                 }}
             />
             <Tab.Screen
@@ -52,9 +59,9 @@ const TabNavigator = () => {
                 component={FeedScreen}
                 options={{
                     tabBarLabel: 'Feed',
-                      tabBarIcon: ({color, size}) => (
-                        <Icon name="clapperboard" size={25} color={colors.text} />
-                      ),
+                    tabBarIcon: ({color, size}) => (
+                        <Icon name="clapperboard" size={25} color={colors.text}/>
+                    ),
                 }}
             />
         </Tab.Navigator>

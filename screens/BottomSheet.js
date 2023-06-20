@@ -10,11 +10,13 @@ import Animated, {
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import {Image} from "expo-image";
 import {WEATHER_ICONS_ENPOINT, WEATHER_ICON_FILE_POSTFIX} from '@env'
-
+import Button_main from "../components/Button_main";
+import { useNavigation } from '@react-navigation/native'
 
 export default function BottomSheet({panY, panCaption, coordinate, temperature, iconCode}) {
     const {height} = useWindowDimensions();
     const weatherIconURL = WEATHER_ICONS_ENPOINT + iconCode + WEATHER_ICON_FILE_POSTFIX;
+    const navigation = useNavigation()
 
     const gestureHandler = useAnimatedGestureHandler(
         {
@@ -85,6 +87,16 @@ export default function BottomSheet({panY, panCaption, coordinate, temperature, 
                                 </View>
                             ) : ""}
                         </View>
+                        {coordinate ? (
+                            <View style={styles.addContainer}>
+                                <Button_main
+                                    title="Add"
+                                    onPress={() => {
+                                        navigation.navigate('Add', {coordinate: coordinate, locationName: panCaption})
+                                    }}
+                                />
+                            </View>
+                        ) : ""}
                         <View style={styles.fakeContent}></View>
                     </View>
                 </SafeAreaView>
@@ -153,6 +165,11 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         alignSelf: 'center'
+    },
+    addContainer: {
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center"
     },
     fakeContent: {
         flex: 1,
